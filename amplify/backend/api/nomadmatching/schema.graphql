@@ -1,0 +1,18 @@
+type UserProfile
+  @model
+  @searchable
+  @auth(rules: [{allow: owner}])
+{
+  id: ID!
+  name: String!
+  email: String!
+  description: String
+  twitterScreenName: String!
+  imageUrl: String
+  location: String!
+  income: Int!
+  skill: String!
+  smoking: Boolean!
+  drink: Boolean!
+  nomadStatus: String!
+}

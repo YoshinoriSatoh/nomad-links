@@ -1,0 +1,246 @@
+type UserProfile {
+  id: ID!
+  name: String!
+  email: String!
+  description: String
+  twitterScreenName: String!
+  imageUrl: String
+  location: String!
+  income: Int!
+  skill: String!
+  smoking: Boolean!
+  drink: Boolean!
+  nomadStatus: String!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUserProfileConnection {
+  items: [UserProfile]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelUserProfileFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  email: ModelStringFilterInput
+  description: ModelStringFilterInput
+  twitterScreenName: ModelStringFilterInput
+  imageUrl: ModelStringFilterInput
+  location: ModelStringFilterInput
+  income: ModelIntFilterInput
+  skill: ModelStringFilterInput
+  smoking: ModelBooleanFilterInput
+  drink: ModelBooleanFilterInput
+  nomadStatus: ModelStringFilterInput
+  and: [ModelUserProfileFilterInput]
+  or: [ModelUserProfileFilterInput]
+  not: ModelUserProfileFilterInput
+}
+
+type Query {
+  getUserProfile(id: ID!): UserProfile
+  listUserProfiles(filter: ModelUserProfileFilterInput, limit: Int, nextToken: String): ModelUserProfileConnection
+  searchUserProfiles(filter: SearchableUserProfileFilterInput, sort: SearchableUserProfileSortInput, limit: Int, nextToken: Int): SearchableUserProfileConnection
+}
+
+input CreateUserProfileInput {
+  id: ID
+  name: String!
+  email: String!
+  description: String
+  twitterScreenName: String!
+  imageUrl: String
+  location: String!
+  income: Int!
+  skill: String!
+  smoking: Boolean!
+  drink: Boolean!
+  nomadStatus: String!
+}
+
+input UpdateUserProfileInput {
+  id: ID!
+  name: String
+  email: String
+  description: String
+  twitterScreenName: String
+  imageUrl: String
+  location: String
+  income: Int
+  skill: String
+  smoking: Boolean
+  drink: Boolean
+  nomadStatus: String
+}
+
+input DeleteUserProfileInput {
+  id: ID
+}
+
+type Mutation {
+  createUserProfile(input: CreateUserProfileInput!): UserProfile
+  updateUserProfile(input: UpdateUserProfileInput!): UserProfile
+  deleteUserProfile(input: DeleteUserProfileInput!): UserProfile
+}
+
+type Subscription {
+  onCreateUserProfile: UserProfile @aws_subscribe(mutations: ["createUserProfile"])
+  onUpdateUserProfile: UserProfile @aws_subscribe(mutations: ["updateUserProfile"])
+  onDeleteUserProfile: UserProfile @aws_subscribe(mutations: ["deleteUserProfile"])
+}
+
+input SearchableStringFilterInput {
+  ne: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+}
+
+input SearchableIDFilterInput {
+  ne: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+}
+
+input SearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input SearchableFloatFilterInput {
+  ne: Float
+  gt: Float
+  lt: Float
+  gte: Float
+  lte: Float
+  eq: Float
+  range: [Float]
+}
+
+input SearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input SearchableUserProfileFilterInput {
+  id: SearchableIDFilterInput
+  name: SearchableStringFilterInput
+  email: SearchableStringFilterInput
+  description: SearchableStringFilterInput
+  twitterScreenName: SearchableStringFilterInput
+  imageUrl: SearchableStringFilterInput
+  location: SearchableStringFilterInput
+  income: SearchableIntFilterInput
+  skill: SearchableStringFilterInput
+  smoking: SearchableBooleanFilterInput
+  drink: SearchableBooleanFilterInput
+  nomadStatus: SearchableStringFilterInput
+  and: [SearchableUserProfileFilterInput]
+  or: [SearchableUserProfileFilterInput]
+  not: SearchableUserProfileFilterInput
+}
+
+enum SearchableSortDirection {
+  asc
+  desc
+}
+
+enum SearchableUserProfileSortableFields {
+  id
+  name
+  email
+  description
+  twitterScreenName
+  imageUrl
+  location
+  income
+  skill
+  smoking
+  drink
+  nomadStatus
+}
+
+input SearchableUserProfileSortInput {
+  field: SearchableUserProfileSortableFields
+  direction: SearchableSortDirection
+}
+
+type SearchableUserProfileConnection {
+  items: [UserProfile]
+  nextToken: String
+}

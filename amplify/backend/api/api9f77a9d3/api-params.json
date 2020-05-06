@@ -1,0 +1,36 @@
+{
+    "paths": [
+        {
+            "name": "/matching",
+            "lambdaFunction": "nomadmatching990fe297",
+            "privacy": {
+                "private": true,
+                "auth": "rw"
+            }
+        }
+    ],
+    "resourceName": "api9f77a9d3",
+    "apiName": "api9f77a9d3",
+    "functionArns": [
+        {
+            "lambdaFunction": "nomadmatching990fe297"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "nomadlinks-20190301174844-authRole",
+        "unAuthRoleName": "nomadlinks-20190301174844-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "nomadmatching990fe297",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "af2e44aa"
+}
